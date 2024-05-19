@@ -16,23 +16,28 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/{id}")
+    @GetMapping("/fetch/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable Long id) {
-        Product product = productService.findById(id);
-        if(product != null) {
+        Product product = null;
+        try {
+            product = productService.findById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (product != null) {
             return new ResponseEntity<>(product, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @GetMapping
+    @GetMapping("/fetch")
     public ResponseEntity<List<Product>> getAllProducts() {
         List<Product> products = productService.getAllProducts();
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<Product> saveProduct(@RequestBody Product product) {
         Product savedProduct = productService.save(product);
         return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
@@ -45,7 +50,7 @@ public class ProductController {
     }
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         productService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
