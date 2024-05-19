@@ -1,4 +1,4 @@
-package com.java4rohit.accounts.audit;
+package com.java4rohit.loans.audit;
 
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.stereotype.Component;
@@ -12,6 +12,6 @@ public class AuditAwareImpl implements AuditorAware<String> {
     @Override
     public Optional<String> getCurrentAuditor() {
 
-        return Optional.of("ACCOUNTS_MS");
+        return Optional.of("LOANS_MS");
     }
 }

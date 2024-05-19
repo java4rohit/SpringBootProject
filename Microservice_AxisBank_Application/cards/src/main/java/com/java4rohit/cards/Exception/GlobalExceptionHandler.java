@@ -1,6 +1,7 @@
 package com.java4rohit.cards.Exception;
 
-import com.eazybytes.cards.dto.ErrorResponseDto;
+
+import com.java4rohit.cards.dto.ErrorResponseDto;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
