@@ -1,2 +1,4 @@
-package com.java4rohit.test.Controller;public class T {
+package com.java4rohit.test.Controller;
+
+public class T {
 }

@@ -1,2 +1,11 @@
-package com.java4rohit.beanLifeCycleSpring;public class AppConfig {
+package com.java4rohit.beanLifeCycleSpring;
+
+
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@ComponentScan("com")
+public class AppConfig {
+
 }

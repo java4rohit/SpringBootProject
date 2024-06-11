@@ -1,0 +1,71 @@
+DOCKER IMPORTANT NOTES::
+
+
+
+services:
+  accounts:
+    image: dockerrohit12/accounts:s4
+    container_name: account-ms
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/microservices_udemy
+      SPRING_DATASOURCE_USERNAME: sa
+      SPRING_DATASOURCE_PASSWORD: 1234
+    ports:
+      - "8080:8080"
+    networks:
+      - springboot-mysql-net
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  loans:
+    image: dockerrohit12/loans:s4
+    container_name: loans-ms
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/microservices_udemy
+      SPRING_DATASOURCE_USERNAME: sa
+      SPRING_DATASOURCE_PASSWORD: 1234
+    ports:
+      - "8090:8090"
+    networks:
+      - springboot-mysql-net
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8090/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  cards:
+    image: dockerrohit12/cards:s4
+    container_name: cards-ms
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/microservices_udemy
+      SPRING_DATASOURCE_USERNAME: sa
+      SPRING_DATASOURCE_PASSWORD: 1234
+    ports:
+      - "9000:9000"
+    networks:
+      - springboot-mysql-net
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  springboot-mysql-net:
+    external: true
